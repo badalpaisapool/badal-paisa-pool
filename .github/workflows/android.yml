@@ -16,5 +16,8 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Build with Gradle
-      run: ./gradlew assembleDebug 
+    - name: Build with Gradle Wrapper
+      run: |
+        chmod +x ./gradlew || true
+        ./gradlew assembleDebug || gradle assembleDebug
+        
