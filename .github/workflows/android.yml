@@ -16,6 +16,5 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Compile App
-      run: javac app/src/main/java/com/badalai/app/MainActivity.java
-      
+    - name: Build with Gradle
+      run: ./gradlew assembleDebug 
