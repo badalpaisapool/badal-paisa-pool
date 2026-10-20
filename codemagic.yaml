@@ -1,7 +1,9 @@
 workflows:
-  android-workflow:
-    name: Android Workflow
-    scripts:
-      - name: Build Android
-        script: npx expo run:android --variant release
-       
+android-workflow:
+name: Android Workflow
+scripts:
+- name: Build Android
+script: |
+cd app
+npm install
+npx expo run:android --variant release
