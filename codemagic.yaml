@@ -2,13 +2,10 @@ workflows:
   android-workflow:
     name: Android Workflow
     scripts:
-      - name: Install dependencies
+      - name: Build Android APK
         script: |
           cd app
           npm install
-      - name: Build Android App
-        script: |
-          cd app
           npx expo prebuild --platform android --clean
           cd android
           ./gradlew assembleRelease
