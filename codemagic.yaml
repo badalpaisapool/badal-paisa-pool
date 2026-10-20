@@ -2,15 +2,16 @@ workflows:
   android-workflow:
     name: Android Workflow
     max_build_duration: 30
+    environment:
+      node: latest
     scripts:
-      - name: Build Android APK
+      - name: Install dependencies and build APK
         script: |
-          cd app
           npm install
           npx expo prebuild --platform android --clean
           cd android
           chmod +x gradlew
           ./gradlew assembleRelease
     artifacts:
-      - app/android/app/build/outputs/apk/release/*.apk
+      - android/app/build/outputs/apk/release/*.apk
       
