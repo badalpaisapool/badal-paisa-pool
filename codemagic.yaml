@@ -5,13 +5,15 @@ workflows:
     environment:
       node: latest
     scripts:
-      - name: Install dependencies and build
+      - name: Build Android AAB and APK
         script: |
           npm install
-          npx expo prebuild --platform android --clean
+          npx expo prebuild --platform android --non-interactive --clear
           cd android
           chmod +x gradlew
+          echo "Building AAB..."
           ./gradlew bundleRelease
+          echo "Building APK..."
           ./gradlew assembleRelease
     artifacts:
       - '**/build/outputs/bundle/release/*.aab'
