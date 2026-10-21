@@ -1,8 +1,9 @@
 {
   "expo": {
-    "name": "Badal Paisa Pool",
+    "name": "Ember Fall Editor",
     "slug": "badal-paisa-pool",
     "version": "1.0.0",
+    "entryPoint": "./App.js",
     "android": {
       "package": "com.badal.paisapool"
     }
