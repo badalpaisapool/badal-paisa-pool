@@ -8,6 +8,7 @@ workflows:
       - name: Prebuild and Build Android
         script: |
           npm install
+          rm -rf android
           npx expo prebuild --platform android --non-interactive
           cd android
           chmod +x gradlew
