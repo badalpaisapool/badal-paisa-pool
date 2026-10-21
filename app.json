@@ -1,14 +1,11 @@
 {
-  "name": "badal-paisa-pool",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "start": "expo start",
-    "android": "expo start --android"
-  },
-  "dependencies": {
-    "expo": "~51.0.0",
-    "react": "18.2.0",
-    "react-native": "0.74.1"
+  "expo": {
+    "name": "Ember Fall Editor",
+    "slug": "badal-paisa-pool",
+    "version": "1.0.0",
+    "entryPoint": "./App.js",
+    "android": {
+      "package": "com.badal.paisapool"
+    }
   }
 }
