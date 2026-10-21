@@ -1,12 +1,11 @@
 {
   "name": "badal-paisa-pool",
   "version": "1.0.0",
-  "main": "App.js",
+  "main": "app/index.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web"
+    "ios": "expo start --ios"
   },
   "dependencies": {
     "expo": "~51.0.0",
