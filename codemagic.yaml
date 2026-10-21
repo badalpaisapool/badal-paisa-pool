@@ -8,12 +8,12 @@ workflows:
       - name: Build Android AAB and APK
         script: |
           npm install
-          npx expo prebuild --platform android --non-interactive --clear
+          npx expo prebuild --platform android --non-interactive
           cd android
           chmod +x gradlew
-          echo "Building AAB..."
+          echo "Building Release AAB..."
           ./gradlew bundleRelease
-          echo "Building APK..."
+          echo "Building Release APK..."
           ./gradlew assembleRelease
     artifacts:
       - '**/build/outputs/bundle/release/*.aab'
