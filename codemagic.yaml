@@ -4,17 +4,15 @@ workflows:
     max_build_duration: 30
     environment:
       node: latest
-      npm: latest
     scripts:
-      - name: Install dependencies
+      - name: Prebuild and Build Android
         script: |
           npm install
-      - name: Build Android Release
-        script: |
+          npx expo prebuild --platform android --non-interactive
           cd android
           chmod +x gradlew
           ./gradlew bundleRelease assembleRelease --no-daemon
     artifacts:
-      - 'android/app/build/outputs/bundle/release/*.aab'
-      - 'android/app/build/outputs/apk/release/*.apk'
+      - '**/build/outputs/bundle/release/*.aab'
+      - '**/build/outputs/apk/release/*.apk'
       
