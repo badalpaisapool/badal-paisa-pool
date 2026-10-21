@@ -8,6 +8,7 @@ workflows:
       - name: Build Android AAB and APK
         script: |
           npm install
+          rm -rf android
           npx expo prebuild --platform android --non-interactive
           cd android
           chmod +x gradlew
