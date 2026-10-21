@@ -1,23 +1,38 @@
 workflows:
   android-workflow:
-    name: Android AAB and APK Workflow
+    name: Codemagic Android Build Workflow
     max_build_duration: 30
     environment:
       node: latest
     scripts:
-      - name: Build Android AAB and APK
+      - name: Locate App.js and Build Android AAB and APK
         script: |
-          PROJECT_DIR=$(find . -name "package.json" -not -path "*/node_modules/*" -exec dirname {} \;)
-          echo "Found project directory at: $PROJECT_DIR"
+          # 1. App.js की लोकेशन ढूँढना
+          APP_PATH=$(find . -name "App.js" -not -path "*/node_modules/*" | head -n 1)
+          if [ -z "$APP_PATH" ]; then
+            APP_PATH=$(find . -name "app.json" -not -path "*/node_modules/*" | head -n 1)
+          fi
+          
+          PROJECT_DIR=$(dirname "$APP_PATH")
+          echo "Codemagic is building from directory: $PROJECT_DIR"
           cd "$PROJECT_DIR"
+
+          # 2. प्रोजेक्ट डिपेंडेंसी इंस्टॉल करना
           npm install
-          npx expo prebuild --platform android --clean
+
+          # 3. अगर एंड्रॉइड फोल्डर नहीं है तो उसे जनरेट करना
+          if [ ! -d "android" ]; then
+            npx react-native eject || npx expo prebuild --platform android --clean
+          fi
+
+          # 4. Android Gradle से AAB और APK बनाना
           cd android
           chmod +x gradlew
-          echo "Building AAB..."
+          echo "Codemagic: Building Release AAB..."
           ./gradlew bundleRelease
-          echo "Building APK..."
+          echo "Codemagic: Building Release APK..."
           ./gradlew assembleRelease
     artifacts:
       - '**/build/outputs/bundle/release/*.aab'
       - '**/build/outputs/apk/release/*.apk'
+      
