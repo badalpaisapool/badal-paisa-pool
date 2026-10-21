@@ -1,13 +1,23 @@
 workflows:
   android-workflow:
-    name: Android Workflow
+    name: Android AAB and APK Workflow
     max_build_duration: 30
     environment:
       node: latest
     scripts:
-      - name: Build Android APK
+      - name: Build Android AAB and APK
         script: |
-          cd app && npm install && npx expo prebuild --platform android --clean && cd android && chmod +x gradlew && ./gradlew assembleRelease
+          PROJECT_DIR=$(find . -name "package.json" -not -path "*/node_modules/*" -exec dirname {} \;)
+          echo "Found project directory at: $PROJECT_DIR"
+          cd "$PROJECT_DIR"
+          npm install
+          npx expo prebuild --platform android --clean
+          cd android
+          chmod +x gradlew
+          echo "Building AAB..."
+          ./gradlew bundleRelease
+          echo "Building APK..."
+          ./gradlew assembleRelease
     artifacts:
-      - app/android/app/build/outputs/apk/release/*.apk
-      
+      - '**/build/outputs/bundle/release/*.aab'
+      - '**/build/outputs/apk/release/*.apk'
