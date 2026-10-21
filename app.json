@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "Badal Paisa Pool",
+    "slug": "badal-paisa-pool",
+    "version": "1.0.0",
+    "android": {
+      "package": "com.badal.paisapool"
+    }
+  }
+}
